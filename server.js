@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const Users = require('./api/user/users');
 const Jobs = require('./api/job/job');
 const logger = require('morgan');
-const cors = require('cors');
+// const cors = require('cors');
 
 const db = require('./api/helpers/config').mongoURI;
 mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch(
@@ -15,7 +15,7 @@ mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch(
     app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
     app.use(bodyParser.json());
     app.use(logger('dev'));
-    app.use(cors())
+    // app.use(cors())
     app.get('/', (req, res) =>{
     return res.status(200).send("packetly");
 })
