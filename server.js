@@ -9,19 +9,19 @@ const logger = require('morgan');
 // const cors = require('cors');
 
 const db = require('./api/helpers/config').mongoURI;
-mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch(
-    err => console.log(err));
+mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch((err) => console.log(err));
 
-    app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
-    app.use(bodyParser.json());
-    app.use(logger('dev'));
-    // app.use(cors())
-    app.get('/', (req, res) =>{
-    return res.status(200).send("packetly");
-})
+app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
+app.use(bodyParser.json());
+app.use(logger('dev'));
+// app.use(cors())
+
 app.use('/api/v1/users', Users);
 app.use('/api/v1/job', Jobs);
+app.get('/', (req, res) => {
+	return res.status(200).send('packetly');
+});
 
 app.listen(PORT, () => {
-    console.log(`App listening on ${PORT}`)
-})
+	console.log(`App listening on ${PORT}`);
+});
