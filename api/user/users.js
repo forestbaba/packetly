@@ -112,4 +112,37 @@ router.post("/login", (req, res) => {
         .catch(err => res.status(400).json(err))
 });
 
+router.post('/profile', async (req, res) =>{
+    if(!req.body.user || req.body.user === ""){
+        return res.status(400).json({error: true, message:"user is required"})
+    }
+    let user = await User.findOne({_id: req.body.user})
+    let profile ={}
+    profile.name = user.name
+    profile.email = user.email
+    profile.wallet_balance = user._doc.wallet_balance
+
+    return res.status(200).json({error: false, profile})
+})
+router.post('/credit_user', async (req, res) =>{
+
+    if(!req.body.user || req.body.user === ""){
+        return res.status(400).json({error: true, message:"user is required"})
+    }
+     User.findOne({_id: req.body.user})
+     .then(user =>{
+        console.log(req.body.wallet_balance)
+        user.wallet_balance = req.body.wallet_balance
+        user.save()
+        .then(w =>{
+            return res.status(200).json({error: false, w})
+        })
+        .catch(err =>{
+            console.log('ERR: ', err)
+        })
+     }).catch(err =>{
+        return res.status(400).json({error: true, message:"Error crediting user"})
+    })
+})
+
 module.exports = router;

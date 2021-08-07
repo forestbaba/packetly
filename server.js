@@ -12,9 +12,9 @@ const cors = require('cors');
 app.use(cors())
 
 const db = require('./api/helpers/config').mongoURI;
-// mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch((err) => console.log(err));
-mongoose.connect('mongodb+srv://forestbaba:08058741116@cluster0.ftvyg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(() => console.log('MongoDb Connected')).catch(
-    err => console.log(err));  
+mongoose.connect(db).then(() => console.log('MongoDb Connected')).catch((err) => console.log(err));
+// mongoose.connect('mongodb+srv://forestbaba:08058741116@cluster0.ftvyg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority').then(() => console.log('MongoDb Connected')).catch(
+//     err => console.log(err));  
 app.use(bodyParser.urlencoded({ extended: false, limit: '5mb' }));
 app.use(bodyParser.json());
 app.use(logger('dev'));

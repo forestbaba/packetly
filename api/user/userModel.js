@@ -16,6 +16,10 @@ const UserSchema = new Schema({
     password: {
         type: String,
     },
+    password: {
+        type: String,
+        default:"0.0"
+    },
     created_at: {
         type: Date,
         default: Date.now
